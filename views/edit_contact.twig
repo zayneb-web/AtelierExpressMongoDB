@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Contact</title>
+</head>
+<body>
+    <h1>Edit Contact</h1>
+    <form action="/contact/edit/{{ contact._id }}" method="post">
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" name="FullName" value="{{ contact.FullName }}" required><br><br>
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="Phone" value="{{ contact.Phone }}" required><br><br>
+        <input type="submit" value="Update">
+    </form>
+</body>
+
+</html>

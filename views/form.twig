@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact List</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Contact List</h1>
+   <!-- Form for searching contacts -->
+<form action="/contact/search" method="get">
+    <label for="searchTerm">Search:</label>
+    <input type="text" id="searchTerm" name="fullName" placeholder="Enter search term">
+    <button type="submit">Search</button>
+</form>
+     {% if message %}
+        <div style="background-color: #4CAF50; color: white; padding: 10px; margin-bottom: 20px;">
+            {{ message }}
+        </div>
+    {% endif %}
+
+    <!-- Form to add a new contact -->
+
+    <form action="/contact/list" method="post">
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" name="FullName" required>
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="Phone" required>
+        <button type="submit">Add Contact</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>Phone</th>
+                <th>Actions</th> <!-- Ajout de la colonne Actions -->
+            </tr>
+        </thead>
+        <tbody>
+        {% for contact in cont %}
+         <tr> 
+             <td>{{ contact.FullName }}</td>
+             <td>{{ contact.Phone }}</td>
+              <td>
+             <form action="/contact/delete/{{ contact._id }}" method="post">
+                            <button type="submit">Delete</button>
+                        </form>
+             <a href="/contact/edit/{{ contact._id }}"><button>Edit</button></a>
+             </td>
+          </tr>
+        {% endfor %}
+    
+    </tbody>
+</body>
+</html>
